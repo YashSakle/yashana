@@ -1,0 +1,38 @@
+#importing req libraries
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+from sklearn import datasets
+from sklearn.cluster import KMeans
+import os 
+os.getcwd()
+os.chdir('C:\\Users\\Yash Sakle\\Downloads')
+df=pd.read_csv('iris.csv')
+df.head()
+df.insert(0, 'id', range(1, 1 + len(df)))
+df.head()
+df.shape
+df.describe()
+df.info()
+x=df.drop(['id'],axis=1)
+x.head()
+#K-MEANS CLUSTRING 
+x = df.iloc[:,[0,1,2,3]].values
+#K-MEANS CLUSTRING 
+x = df.iloc[:,[0,1,2,3]].values
+nu_clusters=range(1,10)
+plt.plot(nu_clusters,wcss,'o-')
+plt.xlabel('Number of Clusters')
+plt.ylabel('Within Clusters Sum of squares')
+kmeans = KMeans(n_clusters=3,init= 'k-means++',max_iter=300,n_init=10,random_state=0)
+y_kmeans = kmeans.fit_predict(x)
+#CLUSTERS
+y_kmeans
+#VISUALISATION
+plt.figure(figsize=(10,6))
+plt.scatter(x[y_kmeans == 0,0], x[y_kmeans == 0,1], s=100,c='red',label='Iris-setosa')
+plt.scatter(x[y_kmeans == 1,0], x[y_kmeans == 1,1], s=100,c='blue',label='Iris-versicolar')
+plt.scatter(x[y_kmeans == 2,0], x[y_kmeans == 2,1], s=100,c='green',label='Iris-verginica')
+plt.scatter(kmeans.cluster_centers_[:,0],kmeans.cluster_centers_[:,1], s=100,c='yellow',label='Centroids')
+plt.legend()
+
