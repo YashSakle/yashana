@@ -1,0 +1,26 @@
+#importing libraries
+import pandas as pd
+import sklearn.datasets as datasets
+#load the dataset
+iris=datasets.load_iris()
+import os 
+os.getcwd()
+os.chdir('//home//amanvw//Documents//yash data')
+x=pd.read_csv('iris.csv')
+x= pd.DataFrame(iris.data, columns=iris.feature_names)
+x.head()
+y=iris.target
+y
+x.describe()
+#now split dataset into train and test 
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.33,random_state=0)
+from sklearn.tree import DecisionTreeClassifier
+dtree=DecisionTreeClassifier()
+dtree.fit(x_train,y_train)
+y_predict=dtree.predict(x_test)
+y_predict
+#constrcting a tree
+import matplotlib.pyplot as plt
+from sklearn import tree
+a=['sepal length (cm)','sepal width (cm)','petal length …
